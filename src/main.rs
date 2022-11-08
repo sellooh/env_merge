@@ -40,7 +40,7 @@ fn main() {
     let mut env_variables: HashMap<String, String> = HashMap::new();
 
     for template in &args.templates {
-        read_template(&template, &mut template_variables);
+        read_template(template, &mut template_variables);
     }
 
     let mut dot_env_file = OpenOptions::new()
@@ -63,7 +63,7 @@ fn main() {
 
         let line_option = buf.split_once('=');
         if let Some((key, value)) = line_option {
-            let (value, ..)  = value.split_once('#').unwrap_or_else(|| (value, ""));
+            let (value, ..)  = value.split_once('#').unwrap_or((value, ""));
             if buf.starts_with( '#') {
                 buf.clear(); // otherwise the data will accumulate in the buffer
                 continue;
